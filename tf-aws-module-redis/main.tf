@@ -4,9 +4,9 @@ provider "aws" {
 resource "aws_elasticache_replication_group" "redis" {
   engine = var.global_replication_group_id == null ? "redis" : null
 
-  parameter_group_name = var.global_replication_group_id == null ? aws_elasticache_parameter_group.redis.name : null
-  subnet_group_name    = aws_elasticache_subnet_group.redis.name
-  security_group_ids   = concat(var.security_group_ids, [aws_security_group.redis.id])
+  parameter_group_name = var.global_replication_group_id == null ? module.elasticache_parameter_group.elasticache_parameter_group_name : null
+  subnet_group_name    = module.elasicache_subnet_group.subnet_group_name
+  security_group_ids   = concat(var.security_group_ids, [module.elasticache_security_groups.security_group_id])
 
   preferred_cache_cluster_azs = var.preferred_cache_cluster_azs
   replication_group_id        = var.global_replication_group_id == null ? "${var.name_prefix}-redis" : "${var.name_prefix}-redis-replica"
@@ -58,4 +58,34 @@ resource "aws_elasticache_replication_group" "redis" {
     },
     var.tags,
   )
+}
+
+module "elasticache_parameter_group" {
+  source = "modules/elasticache_parameter_group"
+  name_prefix = var.name_prefix
+  description = var.description
+  family = var.family
+  tags = var.tags
+  num_node_groups = var.num_node_groups
+  parameter = var.parameter
+}
+
+module "elasicache_subnet_group" {
+  source = "modules/elasticache_subnet_group"
+  name_prefix = var.name_prefix
+  subnet_ids = var.subnet_ids
+  description = var.description
+  global_replication_group_id = var.global_replication_group_id
+  tags = var.tags
+}
+
+module "elasticache_security_groups" {
+  source = "modules/elasticache_security_groups"
+  name_prefix = var.name_prefix
+  vpc_id = var.vpc_id
+  allowed_security_groups = var.allowed_security_groups
+  ingress_cidr_blocks = var.ingress_cidr_blocks
+  ingress_self = var.ingress_self
+  port = var.port
+  tags = var.tags
 }
