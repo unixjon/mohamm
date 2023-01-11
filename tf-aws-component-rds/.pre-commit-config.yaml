@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.13.0"             # e.g. "v0.11.2"
+    hooks:
+      - id: terraform-docs-go
+        args: ["-c",".terraform-docs.yml","./rds"]
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: "v0.1.12" # Get the latest from: https://github.com/gruntwork-io/pre-commit/releases
+    hooks:
+      - id: tflint
+        args: ["--module", "./rds"]
+  

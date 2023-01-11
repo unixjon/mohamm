@@ -1,0 +1,11 @@
+version: ">= 0.13.0"
+
+formatter: markdown table
+
+output:
+  file: "README.md"
+  mode: inject
+
+sort:
+  enabled: true
+  by: required

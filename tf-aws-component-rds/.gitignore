@@ -1,0 +1,9 @@
+**/terraform.tfvars
+**/terraform.output
+**/.terraform.lock.hcl
+**/terraform.tfvars.json
+**/*.auto.tfvars
+**/*.auto.tfvars.json
+**/.terraform/
+**/.DS_Store
+**/terraform.tfstate*
