@@ -84,7 +84,7 @@ module "elasticache_redis" {
   final_snapshot_identifier   = var.final_snapshot_identifier
   global_replication_group_id = var.global_replication_group_id
   ingress_self                = var.ingress_self
-  kms_key_id                  = ""
+  kms_key_id                  = var.kms_key_id == "" ? module.this_redis_kms_key[0].key_arn : null
 
   tags = merge(local.common_tags, var.tags)
 }
