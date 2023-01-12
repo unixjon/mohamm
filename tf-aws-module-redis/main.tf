@@ -61,31 +61,31 @@ resource "aws_elasticache_replication_group" "redis" {
 }
 
 module "elasticache_parameter_group" {
-  source = "modules/elasticache_parameter_group"
-  name_prefix = var.name_prefix
-  description = var.description
-  family = var.family
-  tags = var.tags
+  source          = "modules/elasticache_parameter_group"
+  name_prefix     = var.name_prefix
+  description     = var.description
+  family          = var.family
+  tags            = var.tags
   num_node_groups = var.num_node_groups
-  parameter = var.parameter
+  parameter       = var.parameter
 }
 
 module "elasicache_subnet_group" {
-  source = "modules/elasticache_subnet_group"
-  name_prefix = var.name_prefix
-  subnet_ids = var.subnet_ids
-  description = var.description
+  source                      = "modules/elasticache_subnet_group"
+  name_prefix                 = var.name_prefix
+  subnet_ids                  = var.subnet_ids
+  description                 = var.description
   global_replication_group_id = var.global_replication_group_id
-  tags = var.tags
+  tags                        = var.tags
 }
 
 module "elasticache_security_groups" {
-  source = "modules/elasticache_security_groups"
-  name_prefix = var.name_prefix
-  vpc_id = var.vpc_id
+  source                  = "modules/elasticache_security_groups"
+  name_prefix             = var.name_prefix
+  vpc_id                  = var.vpc_id
   allowed_security_groups = var.allowed_security_groups
-  ingress_cidr_blocks = var.ingress_cidr_blocks
-  ingress_self = var.ingress_self
-  port = var.port
-  tags = var.tags
+  ingress_cidr_blocks     = var.ingress_cidr_blocks
+  ingress_self            = var.ingress_self
+  port                    = var.port
+  tags                    = var.tags
 }
