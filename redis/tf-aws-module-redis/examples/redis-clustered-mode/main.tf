@@ -20,7 +20,7 @@ data "aws_subnets" "all" {
 # Elasticache Redis
 #####
 module "redis" {
-  source = "../../"
+  source = "../.."
 
   name_prefix        = "redis-clustered-example"
   num_cache_clusters = 2

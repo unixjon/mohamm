@@ -41,7 +41,7 @@ data "aws_subnets" "replica" {
 #####
 
 module "redis_main" {
-  source = "../../"
+  source = "../.."
 
   name_prefix        = "redis-example-main"
   num_cache_clusters = 2
@@ -58,7 +58,7 @@ resource "aws_elasticache_global_replication_group" "this" {
 }
 
 module "redis_replica" {
-  source = "../../"
+  source = "../.."
 
   name_prefix        = "redis-example-replica"
   num_cache_clusters = 2

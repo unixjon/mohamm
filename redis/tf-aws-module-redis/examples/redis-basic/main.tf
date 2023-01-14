@@ -30,7 +30,7 @@ resource "aws_security_group" "other_sg" {
 # Elasticache Redis
 #####
 module "redis" {
-  source = "../../"
+  source = "../.."
 
   name_prefix        = "redis-basic-example"
   num_cache_clusters = 2
